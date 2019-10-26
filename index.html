@@ -62,6 +62,7 @@
 				
 				checkType();
 				$('#type').change(checkType);
+				$("#controldiv").hide();
 			});
 			
 			function checkType() {
@@ -88,12 +89,21 @@
 				// create the global player from the specific iframe (#video)
 				player = new YT.Player('video', {
 					videoId: 'BFlHyr_sXQc',
-					playerVars: { 'autoplay': 1},
 					events: {
 					  // call this function when player is ready to use
-					  'onReady': onPlayerReady
+					  'onReady': onPlayerReady,
+					  'onStateChange': onPlayerStateChange
 					}
 				});
+			}
+			
+			var firststarted = true;
+			function onPlayerStateChange(event) {
+				if (firststarted) {
+					$("#controldiv").show();
+					player.stopVideo();
+					firststarted = false;
+				}
 			}
 
 			function onPlayerReady(event) {
@@ -150,22 +160,22 @@
 		</style>
 	</head>
 	<body>
-		<div id="debug"></div>
-		<select id="advlist"></select>&nbsp;&nbsp;&nbsp;<span>Total Video Time: <span id="totaltime">0</span></span><br/><br/>
-		**Click the video below before clicking the button<br/>
-		<button class="button" id="play-button">Play</button>
-		<button class="button" id="repeat-button">Repeat</button>
-		<button class="button" id="show-answer">Show Answer</button>&nbsp;&nbsp;&nbsp;<span id="answer"></span>
-		<br/><br/>
-		<select id="type">
-			<option value="auto">Auto</option>
-			<option value="maunal">Maunal</option>
-		</select>
-		<span id="autobox">Duration in %: <input type="number" id="durationpercentage" value="0.1" min="0.1" max="0.5" step="0.1"/></span>
-		<span id="manualbox">Video Start Time: <input type="number" id="targetstart" value="0" min="0" step="1"/>
-		Duration: <input type="number" id="targetduration" value="1" min="1" step="1"/></span>
-		<br/><br/>
-		<button class="button" id="show-video">Show/Hide Video</button>
+		<div id="controldiv">
+			<select id="advlist"></select>&nbsp;&nbsp;&nbsp;<span>Total Video Time: <span id="totaltime">0</span></span><br/><br/>
+			<button class="button" id="play-button">Play</button>
+			<button class="button" id="repeat-button">Repeat</button>
+			<button class="button" id="show-answer">Show Answer</button>&nbsp;&nbsp;&nbsp;<span id="answer"></span>
+			<br/><br/>
+			<select id="type">
+				<option value="auto">Auto</option>
+				<option value="maunal">Maunal</option>
+			</select>
+			<span id="autobox">Duration in %: <input type="number" id="durationpercentage" value="0.1" min="0.1" max="0.5" step="0.1"/></span>
+			<span id="manualbox">Video Start Time: <input type="number" id="targetstart" value="0" min="0" step="1"/>
+			Duration: <input type="number" id="targetduration" value="1" min="1" step="1"/></span>
+			<br/><br/>
+			<button class="button" id="show-video">Show/Hide Video</button>
+		</div>
 		<div>
 			<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/BFlHyr_sXQc?enablejsapi=1" allowfullscreen></iframe>
 			<div id="overlay" style="width: 580px; height: 335px; background-color: black; z-index:9999; position: absolute;"></div>	
