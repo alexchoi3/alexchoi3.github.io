@@ -45,7 +45,7 @@
 							
 			$(document).ready(function(){				
 				$.each(videoArr, function (index, value) {
-					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text(index + ": " + value[1])); 
+					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + index); 
 				});
 				
 				$('#advlist').change(function(){
@@ -100,6 +100,7 @@
 				// bind events
 				var playButton = document.getElementById("play-button");
 				playButton.addEventListener("click", function() {
+					$("#answer").text("");
 					if($('#type').val() == "auto") {
 						var duration = Math.ceil(parseInt($( "#advlist option:selected" ).attr("total")) * $("#durationpercentage").val());
 						$("#targetduration").val(duration);
@@ -118,6 +119,7 @@
 				});
 				
 				$("#repeat-button").click(function(){
+					$("#answer").text("");
 					player.seekTo(parseInt($( "#advlist option:selected" ).attr("start")) + parseInt($("#targetstart").val()), true);
 					clearTimeout(timeoutfunction);
 					player.playVideo();
@@ -125,6 +127,7 @@
 				});
 				
 				$("#show-answer").click(function(){
+					$("#answer").text($( "#advlist option:selected" ).attr("answer"));
 					$("#overlay").hide();
 					clearTimeout(timeoutfunction);
 					player.seekTo(parseInt($( "#advlist option:selected" ).attr("start")), true);
@@ -151,7 +154,7 @@
 		**Click the video below before clicking the button<br/>
 		<button class="button" id="play-button">Play</button>
 		<button class="button" id="repeat-button">Repeat</button>
-		<button class="button" id="show-answer">Show Answer</button>
+		<button class="button" id="show-answer">Show Answer</button><span id="answer"><span>
 		<br/><br/>
 		<select id="type">
 			<option value="auto">Auto</option>
