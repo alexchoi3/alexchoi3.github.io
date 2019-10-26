@@ -117,6 +117,13 @@
 					//player.stopVideo();
 				});
 				
+				$("#repeat-button").click(function(){
+					player.seekTo(parseInt($( "#advlist option:selected" ).attr("start")) + parseInt($("#targetstart").val()), true);
+					clearTimeout(timeoutfunction);
+					player.playVideo();
+					timeoutfunction = setTimeout(function(){ player.pauseVideo();}, parseInt($("#targetduration").val())*1000);
+				});
+				
 				$("#show-answer").click(function(){
 					$("#overlay").hide();
 					clearTimeout(timeoutfunction);
@@ -142,7 +149,8 @@
 		<div id="debug"></div>
 		<select id="advlist"></select>&nbsp;&nbsp;&nbsp;<span>Total Video Time: <span id="totaltime">0</span></span><br/><br/>
 		**Click the video below before clicking the button<br/>
-		<button class="button" id="play-button">PLAY</button>
+		<button class="button" id="play-button">Play</button>
+		<button class="button" id="repeat-button">Repeat</button>
 		<button class="button" id="show-answer">Show Answer</button>
 		<br/><br/>
 		<select id="type">
