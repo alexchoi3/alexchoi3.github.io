@@ -11,45 +11,48 @@
 			var firstScriptTag = document.getElementsByTagName('script')[0];
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 			
-			var videoArr = [["https://youtu.be/BFlHyr_sXQc","美源髮彩",0,9],
-							["https://youtu.be/BFlHyr_sXQc","愛膚堅",10,19],
-							["https://youtu.be/BFlHyr_sXQc","黑旋風",20,29],
-							["https://youtu.be/BFlHyr_sXQc","速治靈 ",30,45],
-							["https://youtu.be/BFlHyr_sXQc","卡樂B",46,60],
-							["https://youtu.be/BFlHyr_sXQc","維他朱古力奶",61,79],
-							["https://youtu.be/BFlHyr_sXQc","萬里望花生",80,109],
-							["https://youtu.be/BFlHyr_sXQc","CTI",110,140],
-							["https://youtu.be/BFlHyr_sXQc","時興隆",141,170],
-							["https://youtu.be/BFlHyr_sXQc","日本肝油丸",171,185],
-							["https://youtu.be/BFlHyr_sXQc","雀巢即溶奶粉",186,205],
-							["https://youtu.be/BFlHyr_sXQc","丹麥藍罐曲奇",206,225],
-							["https://youtu.be/BFlHyr_sXQc","麥當勞",226,256],
-							["https://youtu.be/BFlHyr_sXQc","Kinder出奇蛋",257,277],
-							["https://youtu.be/BFlHyr_sXQc","粟一燒",278,291],
-							["https://youtu.be/BFlHyr_sXQc","廣播事務管理局",321,351],
-							["https://youtu.be/BFlHyr_sXQc","生命滿希望 前路由我創",352,381],
-							["https://youtu.be/BFlHyr_sXQc","四海魚蛋",411,420],
-							["https://youtu.be/BFlHyr_sXQc","出前一丁",421,435],
-							["https://youtu.be/BFlHyr_sXQc","喇叭牌正露丸",436,465],
-							["https://youtu.be/BFlHyr_sXQc","萬樂珠",466,495],
-							["https://youtu.be/BFlHyr_sXQc","八珍甜醋",496,506],
-							["https://youtu.be/BFlHyr_sXQc","保儕丸",541,600],
-							["https://youtu.be/BFlHyr_sXQc","百佳",688,718],
-							["https://youtu.be/BFlHyr_sXQc","胃仙U",719,752],
-							["https://youtu.be/BFlHyr_sXQc","麥提莎",838,868],
-							["https://youtu.be/BFlHyr_sXQc","金香香米",883,912],
-							["https://youtu.be/BFlHyr_sXQc","漢堡酒家",972,1002],
-							["https://youtu.be/_LpAAPBNtaI","陽光檸檬茶",0,30],
-							["https://youtu.be/Q_xC1qiXr-M","德成僱傭",0,30],
-							["https://youtu.be/sJGvkSktcVw","榮華臘腸",0,19]];
+			var videoArr = [["https://www.youtube.com/embed/BFlHyr_sXQc","美源髮彩",0,9],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","愛膚堅",10,19],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","黑旋風",20,29],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","速治靈 ",30,45],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","卡樂B",46,60],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","維他朱古力奶",61,79],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","萬里望花生",80,109],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","CTI",110,140],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","時興隆",141,170],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","日本肝油丸",171,185],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","雀巢即溶奶粉",186,205],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","丹麥藍罐曲奇",206,225],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","麥當勞",226,256],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","Kinder出奇蛋",257,277],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","粟一燒",278,291],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","廣播事務管理局",321,351],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","生命滿希望 前路由我創",352,381],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","四海魚蛋",411,420],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","出前一丁",421,435],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","喇叭牌正露丸",436,465],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","萬樂珠",466,495],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","八珍甜醋",496,506],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","保儕丸",541,600],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","百佳",688,718],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","胃仙U",719,752],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","麥提莎",838,868],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","金香香米",883,912],
+							["https://www.youtube.com/embed/BFlHyr_sXQc","漢堡酒家",972,1002],
+							["https://www.youtube.com/embed/_LpAAPBNtaI","陽光檸檬茶",0,30],
+							["https://www.youtube.com/embed/Q_xC1qiXr-M","德成僱傭",0,30],
+							["https://www.youtube.com/embed/sJGvkSktcVw","榮華臘腸",0,19]];
 							
-			$(document).ready(function(){
+			$(document).ready(function(){				
 				$.each(videoArr, function (index, value) {
 					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text(index + ": " + value[1])); 
 				});
 				
 				$('#advlist').change(function(){
-					$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
+                	$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
+					if (!$("#video").attr("src").includes($( "#advlist option:selected" ).val())) {
+						$("#video").attr("src", $( "#advlist option:selected" ).val() + "?enablejsapi=1");
+					}
 				});
 				
 				//$("#overlay").hide();
@@ -86,9 +89,14 @@
 				player = new YT.Player('video', {
 					events: {
 					  // call this function when player is ready to use
-					  'onReady': onPlayerReady
+					  'onReady': onPlayerReady,
+					  'onStateChange': onPlayerStateChange
 					}
 				});
+			}
+			
+			function onPlayerStateChange(event) {
+				clearTimeout(timeoutfunction);
 			}
 
 			function onPlayerReady(event) {
@@ -149,7 +157,7 @@
 		<br/><br/>
 		<button class="button" id="show-video">Show/Hide Video</button>
 		<div>
-			<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/BFlHyr_sXQc?enablejsapi=1&html5=1&amp;wmode=transparent" allowfullscreen></iframe>
+			<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/BFlHyr_sXQc?enablejsapi=1" allowfullscreen></iframe>
 			<div id="overlay" style="width: 580px; height: 335px; background-color: black; z-index:9999; position: absolute;"></div>	
 		</div>
 		<br/>
