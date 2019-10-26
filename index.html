@@ -91,14 +91,9 @@
 					playerVars: { 'autoplay': 1},
 					events: {
 					  // call this function when player is ready to use
-					  'onReady': onPlayerReady,
-					  'onStateChange': onPlayerStateChange
+					  'onReady': onPlayerReady
 					}
 				});
-			}
-			
-			function onPlayerStateChange(event) {
-				clearTimeout(timeoutfunction);
 			}
 
 			function onPlayerReady(event) {
