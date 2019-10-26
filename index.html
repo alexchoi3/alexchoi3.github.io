@@ -45,7 +45,7 @@
 							
 			$(document).ready(function(){				
 				$.each(videoArr, function (index, value) {
-					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + index); 
+					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + index)); 
 				});
 				
 				$('#advlist').change(function(){
@@ -100,6 +100,7 @@
 				// bind events
 				var playButton = document.getElementById("play-button");
 				playButton.addEventListener("click", function() {
+					$("#overlay").show();
 					$("#answer").text("");
 					if($('#type').val() == "auto") {
 						var duration = Math.ceil(parseInt($( "#advlist option:selected" ).attr("total")) * $("#durationpercentage").val());
@@ -154,7 +155,7 @@
 		**Click the video below before clicking the button<br/>
 		<button class="button" id="play-button">Play</button>
 		<button class="button" id="repeat-button">Repeat</button>
-		<button class="button" id="show-answer">Show Answer</button><span id="answer"></span>
+		<button class="button" id="show-answer">Show Answer</button>&nbsp;&nbsp;&nbsp;<span id="answer"></span>
 		<br/><br/>
 		<select id="type">
 			<option value="auto">Auto</option>
