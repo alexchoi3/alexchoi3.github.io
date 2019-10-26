@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			// Inject YouTube API script
+			var timeoutfunction;
+			var tag = document.createElement('script');
+			tag.src = "https://www.youtube.com/player_api";
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			
+			var videoArr = [["https://youtu.be/BFlHyr_sXQc","美源髮彩",0,9],
+							["https://youtu.be/BFlHyr_sXQc","愛膚堅",10,19],
+							["https://youtu.be/BFlHyr_sXQc","黑旋風",20,29],
+							["https://youtu.be/BFlHyr_sXQc","速治靈 ",30,45],
+							["https://youtu.be/BFlHyr_sXQc","卡樂B",46,60],
+							["https://youtu.be/BFlHyr_sXQc","維他朱古力奶",61,79],
+							["https://youtu.be/BFlHyr_sXQc","萬里望花生",80,109],
+							["https://youtu.be/BFlHyr_sXQc","CTI",110,140],
+							["https://youtu.be/BFlHyr_sXQc","時興隆",141,170],
+							["https://youtu.be/BFlHyr_sXQc","日本肝油丸",171,185],
+							["https://youtu.be/BFlHyr_sXQc","雀巢即溶奶粉",186,205],
+							["https://youtu.be/BFlHyr_sXQc","丹麥藍罐曲奇",206,225],
+							["https://youtu.be/BFlHyr_sXQc","麥當勞",226,256],
+							["https://youtu.be/BFlHyr_sXQc","Kinder出奇蛋",257,277],
+							["https://youtu.be/BFlHyr_sXQc","粟一燒",278,291],
+							["https://youtu.be/BFlHyr_sXQc","廣播事務管理局",321,351],
+							["https://youtu.be/BFlHyr_sXQc","生命滿希望 前路由我創",352,381],
+							["https://youtu.be/BFlHyr_sXQc","四海魚蛋",411,420],
+							["https://youtu.be/BFlHyr_sXQc","出前一丁",421,435],
+							["https://youtu.be/BFlHyr_sXQc","喇叭牌正露丸",436,465],
+							["https://youtu.be/BFlHyr_sXQc","萬樂珠",466,495],
+							["https://youtu.be/BFlHyr_sXQc","八珍甜醋",496,506],
+							["https://youtu.be/BFlHyr_sXQc","保儕丸",541,600],
+							["https://youtu.be/BFlHyr_sXQc","百佳",688,718],
+							["https://youtu.be/BFlHyr_sXQc","胃仙U",719,752],
+							["https://youtu.be/BFlHyr_sXQc","麥提莎",838,868],
+							["https://youtu.be/BFlHyr_sXQc","金香香米",883,912],
+							["https://youtu.be/BFlHyr_sXQc","漢堡酒家",972,1002],
+							["https://youtu.be/_LpAAPBNtaI","陽光檸檬茶",0,30],
+							["https://youtu.be/Q_xC1qiXr-M","德成僱傭",0,30],
+							["https://youtu.be/sJGvkSktcVw","榮華臘腸",0,19]];
+							
+			$(document).ready(function(){
+				$.each(videoArr, function (index, value) {
+					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text(index + ": " + value[1])); 
+				});
+				
+				$('#advlist').change(function(){
+					$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
+				});
+				
+				//$("#overlay").hide();
+				$("#show-video").click(function(){
+					$("#overlay").toggle();
+				});
+				
+				checkType();
+				$('#type').change(checkType);
+			});
+			
+			function checkType() {
+				if($('#type').val() == "auto") {
+					$("#autobox").show();
+					$("#manualbox").hide();
+					$("#targetstart").prop('disabled', true);
+					$("#targetduration").prop('disabled', true);
+					$("#durationpercentage").prop('disabled', false);
+				} else {
+					$("#autobox").hide();
+					$("#manualbox").show();
+					$("#targetstart").prop('disabled', false);
+					$("#targetduration").prop('disabled', false);
+					$("#durationpercentage").prop('disabled', true);
+				}
+			}
+							
+			// global variable for the player
+			var player;
+
+			// this function gets called when API is ready to use
+			function onYouTubePlayerAPIReady() {
+				// create the global player from the specific iframe (#video)
+				player = new YT.Player('video', {
+					events: {
+					  // call this function when player is ready to use
+					  'onReady': onPlayerReady
+					}
+				});
+			}
+
+			function onPlayerReady(event) {
+				// bind events
+				var playButton = document.getElementById("play-button");
+				playButton.addEventListener("click", function() {
+					if($('#type').val() == "auto") {
+						var duration = Math.ceil(parseInt($( "#advlist option:selected" ).attr("total")) * $("#durationpercentage").val());
+						$("#targetduration").val(duration);
+						
+						$("#targetstart").val(getRandomInt(0, parseInt($( "#advlist option:selected" ).attr("total")) - duration));
+					}
+					
+					player.seekTo(parseInt($( "#advlist option:selected" ).attr("start")) + parseInt($("#targetstart").val()), true);
+					clearTimeout(timeoutfunction);
+					player.playVideo();
+					
+					//$("#debug").append(parseInt($("#targetduration"))*1000).append("<br/>");
+					timeoutfunction = setTimeout(function(){ player.pauseVideo();}, parseInt($("#targetduration").val())*1000);
+					//player.pauseVideo();
+					//player.stopVideo();
+				});
+				
+				$("#show-answer").click(function(){
+					$("#overlay").hide();
+					clearTimeout(timeoutfunction);
+					player.seekTo(parseInt($( "#advlist option:selected" ).attr("start")), true);
+					player.playVideo();
+					timeoutfunction = setTimeout(function(){ player.pauseVideo();}, (parseInt($( "#advlist option:selected" ).attr("total"))+1)*1000);
+				});
+			}
+			
+			function getRandomInt(min, max) {
+				min = Math.ceil(min);
+				max = Math.floor(max);
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+		</script>
+		<style>
+			.button { padding:10px 20px; font-weight:bold; letter-spacing:5px; outline:none; cursor:pointer; color:white; background-color:#7F8C8D; border:none; border-radius:4px; }
+			.button:hover { background-color:#27AE60; }
+			iframe { margin:0 auto; width:560px; height:315px; float:left; clear:both; display:block; background-color:#eee; }
+		</style>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<select id="advlist"></select>&nbsp;&nbsp;&nbsp;<span>Total Video Time: <span id="totaltime">0</span></span><br/><br/>
+		<button class="button" id="play-button">PLAY</button>
+		<button class="button" id="show-answer">Show Answer</button>
+		<br/><br/>
+		<select id="type">
+			<option value="auto">Auto</option>
+			<option value="maunal">Maunal</option>
+		</select>
+		<span id="autobox">Duration in %: <input type="number" id="durationpercentage" value="0.1" min="0.1" max="0.5" step="0.1"/></span>
+		<span id="manualbox">Video Start Time: <input type="number" id="targetstart" value="0" min="0" step="1"/>
+		Duration: <input type="number" id="targetduration" value="1" min="1" step="1"/></span>
+		<br/><br/>
+		<button class="button" id="show-video">Show/Hide Video</button>
+		<div>
+			<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/BFlHyr_sXQc?enablejsapi=1&html5=1&amp;wmode=transparent" allowfullscreen></iframe>
+			<div id="overlay" style="width: 580px; height: 335px; background-color: black; z-index:9999; position: absolute;"></div>	
+		</div>
+		<br/>
+	</body> 
+</html>
