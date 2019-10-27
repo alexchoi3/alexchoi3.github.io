@@ -48,6 +48,7 @@
 					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + index)); 
 				});
 				
+				$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
 				$('#advlist').change(function(){
                 	$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
 					if (!$("#video").attr("src").includes($( "#advlist option:selected" ).val())) {
