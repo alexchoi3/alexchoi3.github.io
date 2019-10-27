@@ -45,7 +45,7 @@
 							
 			$(document).ready(function(){				
 				$.each(videoArr, function (index, value) {
-					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + index)); 
+					$('#advlist').append($("<option></option>").attr("value",value[0]).attr("answer",value[1]).attr("start",value[2]).attr("end",value[3]).attr("total",value[3]-value[2]).text("Question " + (index + 1))); 
 				});
 				
 				$("#totaltime").text($( "#advlist option:selected" ).attr("total"));
